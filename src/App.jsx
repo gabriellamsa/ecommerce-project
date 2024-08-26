@@ -30,13 +30,33 @@ function App() {
         <h1 className="text-white text-2xl font-bold">WearNova</h1>
       </header>
 
-      <nav className="bg-gray-200 p-4">
+      <nav className="bg-gray-800 p-4">
         <ul className="flex space-x-4">
+          <li>
+            <a
+              href="https://fakestoreapi.com/carts"
+              className="text-white hover:bg-blue-600 px-4 py-2 rounded"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Carts
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://fakestoreapi.com/auth/login"
+              className="text-white hover:bg-blue-600 px-4 py-2 rounded"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Login
+            </a>
+          </li>
           <li>
             <button
               onClick={() => setCategory("all")}
-              className={`p-2 ${
-                category === "all" ? "bg-blue-500 text-white" : "bg-gray-300"
+              className={`text-white hover:bg-blue-600 px-4 py-2 rounded ${
+                category === "all" ? "bg-blue-600" : "bg-gray-700"
               }`}
             >
               All
@@ -45,10 +65,8 @@ function App() {
           <li>
             <button
               onClick={() => setCategory("men's clothing")}
-              className={`p-2 ${
-                category === "men's clothing"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-300"
+              className={`text-white hover:bg-blue-600 px-4 py-2 rounded ${
+                category === "men's clothing" ? "bg-blue-600" : "bg-gray-700"
               }`}
             >
               Men's Clothing
@@ -57,10 +75,8 @@ function App() {
           <li>
             <button
               onClick={() => setCategory("women's clothing")}
-              className={`p-2 ${
-                category === "women's clothing"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-300"
+              className={`text-white hover:bg-blue-600 px-4 py-2 rounded ${
+                category === "women's clothing" ? "bg-blue-600" : "bg-gray-700"
               }`}
             >
               Women's Clothing
