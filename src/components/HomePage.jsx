@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import logo from "../assets/wearnova-logo.jpeg";
+import Cart from "./Cart";
+import { BsBag, BsBagPlus } from "react-icons/bs";
 
 function HomePage() {
   const [products, setProducts] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const [isCartVisible, setIsCartVisible] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -18,6 +22,20 @@ function HomePage() {
     fetchProducts();
   }, []);
 
+  const addToCart = (product) => {
+    setCartItems((prevItems) => [...prevItems, product]);
+  };
+
+  const removeFromCart = (productId) => {
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item.id !== productId)
+    );
+  };
+
+  const toggleCartVisibility = () => {
+    setIsCartVisible((prev) => !prev);
+  };
+
   const menProducts = products.filter(
     (product) => product.category === "men's clothing"
   );
@@ -27,47 +45,43 @@ function HomePage() {
 
   return (
     <div>
-      <header className="bg-slate-800 p-4 flex items-center justify-between">
+      <header className="bg-gray-800 p-4 flex items-center justify-between">
         <div className="flex items-center">
-          <img src={logo} alt="WearNova Logo" className="h-10 mr-4" />
+          <img src={logo} alt="WearNova Logo" className="h-12 mr-4" />
           <h1 className="text-white text-2xl font-bold">WearNova</h1>
         </div>
-        <nav className="flex space-x-4">
-          <a
-            href="https://fakestoreapi.com/carts"
-            className="text-white hover:bg-blue-600 px-4 py-2 rounded"
-            target="_blank"
-            rel="noopener noreferrer"
+        <nav className="flex items-center space-x-4">
+          <button
+            onClick={toggleCartVisibility}
+            className="text-white hover:bg-blue-600 p-2 rounded flex items-center"
           >
-            Cart
-          </a>
+            <BsBag className="text-white text-2xl" />
+          </button>
           <a
             href="https://fakestoreapi.com/auth/login"
-            className="text-white hover:bg-blue-600 px-4 py-2 rounded"
+            className="text-white hover:bg-blue-600 p-2 rounded flex items-center"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Login
+            Sign In
           </a>
         </nav>
       </header>
 
       <nav className="bg-gray-800 p-4">
-        <div className="flex items-center">
-          <div className="flex-grow flex space-x-4">
-            <a
-              href="#men"
-              className="text-white hover:bg-blue-600 px-4 py-2 rounded"
-            >
-              Men's Clothing
-            </a>
-            <a
-              href="#women"
-              className="text-white hover:bg-blue-600 px-4 py-2 rounded"
-            >
-              Women's Clothing
-            </a>
-          </div>
+        <div className="flex space-x-4">
+          <a
+            href="#men"
+            className="text-white hover:bg-blue-600 px-4 py-2 rounded"
+          >
+            Men's Clothing
+          </a>
+          <a
+            href="#women"
+            className="text-white hover:bg-blue-600 px-4 py-2 rounded"
+          >
+            Women's Clothing
+          </a>
         </div>
       </nav>
 
@@ -89,6 +103,12 @@ function HomePage() {
                   <h3 className="text-xl font-bold mb-2">{product.title}</h3>
                   <p className="text-gray-700 mb-4">{product.description}</p>
                   <p className="text-lg font-semibold">${product.price}</p>
+                  <button
+                    onClick={() => addToCart(product)}
+                    className="bg-blue-500 text-white p-2 rounded flex items-center"
+                  >
+                    <BsBagPlus className="text-white text-xl" />
+                  </button>
                 </div>
               ))
             ) : (
@@ -116,6 +136,12 @@ function HomePage() {
                   <h3 className="text-xl font-bold mb-2">{product.title}</h3>
                   <p className="text-gray-700 mb-4">{product.description}</p>
                   <p className="text-lg font-semibold">${product.price}</p>
+                  <button
+                    onClick={() => addToCart(product)}
+                    className="bg-blue-500 text-white p-2 rounded flex items-center"
+                  >
+                    <BsBagPlus className="text-white text-xl" />
+                  </button>
                 </div>
               ))
             ) : (
@@ -126,6 +152,10 @@ function HomePage() {
           </div>
         </section>
       </main>
+
+      {isCartVisible && (
+        <Cart cartItems={cartItems} onRemoveItem={removeFromCart} />
+      )}
     </div>
   );
 }
