@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import logo from "../assets/wearnova-logo.jpeg";
 
 function HomePage() {
   const [products, setProducts] = useState([]);
@@ -26,49 +27,48 @@ function HomePage() {
 
   return (
     <div>
-      <header className="bg-blue-500 p-4">
-        <h1 className="text-white text-2xl font-bold">WearNova</h1>
+      <header className="bg-slate-800 p-4 flex items-center justify-between">
+        <div className="flex items-center">
+          <img src={logo} alt="WearNova Logo" className="h-10 mr-4" />
+          <h1 className="text-white text-2xl font-bold">WearNova</h1>
+        </div>
+        <nav className="flex space-x-4">
+          <a
+            href="https://fakestoreapi.com/carts"
+            className="text-white hover:bg-blue-600 px-4 py-2 rounded"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Cart
+          </a>
+          <a
+            href="https://fakestoreapi.com/auth/login"
+            className="text-white hover:bg-blue-600 px-4 py-2 rounded"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Login
+          </a>
+        </nav>
       </header>
 
       <nav className="bg-gray-800 p-4">
-        <ul className="flex space-x-4">
-          <li>
-            <a
-              href="https://fakestoreapi.com/carts"
-              className="text-white hover:bg-blue-600 px-4 py-2 rounded"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Carts
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://fakestoreapi.com/auth/login"
-              className="text-white hover:bg-blue-600 px-4 py-2 rounded"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Login
-            </a>
-          </li>
-          <li>
+        <div className="flex items-center">
+          <div className="flex-grow flex space-x-4">
             <a
               href="#men"
               className="text-white hover:bg-blue-600 px-4 py-2 rounded"
             >
               Men's Clothing
             </a>
-          </li>
-          <li>
             <a
               href="#women"
               className="text-white hover:bg-blue-600 px-4 py-2 rounded"
             >
               Women's Clothing
             </a>
-          </li>
-        </ul>
+          </div>
+        </div>
       </nav>
 
       <main className="p-4">
